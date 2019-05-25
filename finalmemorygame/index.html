@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Memory Card Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+
+  <style>
+    body {
+           margin-right: 2%;
+           margin-left: 2%;
+       }
+       #cardsContainer {
+           display: flex;
+           flex-wrap: wrap;
+           width: 300px;
+           height: 200px;
+           margin-left: 20%;
+           background-color: rgb(170, 169, 169);
+       }
+       #progressContainer{
+           text-align: right;
+       }
+       #steps {
+           margin-right: 3%;
+       }
+       i {
+           position: relative;
+           top: 5px;
+       }
+       .memoryCard {
+           width: calc(25% - 15px);
+           height: calc(33.33% - 15px);
+           width: 23%;
+           margin: 1% auto;
+           position: relative;
+           transform-style: preserve-3d;
+           transition: .5s;
+       }
+       .memoryCard.flip {
+           transform: rotateY(180deg);
+       }
+       .front-face, .back-face {
+           position: absolute;
+           width: 100%;
+           height: 100%;
+           border: 1px solid white;
+           backface-visibility: hidden;
+       }
+       #progressContainer {
+           width: 20%;
+           float: right;
+           text-align: center;
+           max-height: fit-content;
+       }
+       #hourGlass {
+           display: inline-block;
+       }
+       .rotatedHour {
+           position: relative;
+           transition: 2s;
+           transform: rotateZ(180deg);
+           animation: rotate linear;
+           animation-duration: 300ms;
+       }
+       .rotatedHour .fa-hourglass-end{
+           color: rgb(97, 173, 248);
+           top: -3px;
+       }
+       .activeStep .fa-shoe-prints {
+           color: rgb(115, 226, 124);
+       }
+       .front-face {
+           transform: rotateY(180deg);
+       }
+  </style>
+
+
+
+        <section id="progressContainer">
+            <div id="hourGlass">
+                <i class="fas fa-hourglass-end endHourGlass" style="font-size: 1.5em"></i>
+            </div>
+            <span id="TwoDigitTimer"> 00 : 00 : 00</span>
+            <br>
+            <br>
+            <section id="steps">
+                <i class="fas fa-shoe-prints fa-rotate-270"  style="font-size: 1.5em"></i>
+                <span id="numberOfSteps"> 0 step(s)</span>
+            </section>
+        </section>
+    <br>
+    <section id="cardsContainer">
+        <div class="memoryCard" data-name="red">
+            <img class="front-face" src="http://via.placeholder.com/120/FF0000/FFFFFF?text=1"  alt="front-face">
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+        <div class="memoryCard" data-name="red">
+            <img class="front-face" src="http://via.placeholder.com/120/FF0000/FFFFFF?text=1" alt="front-face" >
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+        <div class="memoryCard" data-name="blue">
+            <img class="front-face" src="http://via.placeholder.com/120/0000FF/FFFFFF?text=2" alt="front-face" >
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+        <div class="memoryCard" data-name="blue">
+            <img class="front-face" src="http://via.placeholder.com/120/0000FF/FFFFFF?text=2" alt="front-face" >
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+        <div class="memoryCard" data-name="green">
+            <img class="front-face" src="http://via.placeholder.com/120/008000/FFFFFF?text=3" alt="front-face" >
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+        <div class="memoryCard" data-name="green">
+            <img class="front-face" src="http://via.placeholder.com/120/008000/FFFFFF?text=3" alt="front-face" >
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+        <div class="memoryCard" data-name="paleYellow">
+            <img class="front-face" src="http://via.placeholder.com/120/FADA5E/FFFFFF?text=4" alt="front-face" >
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+        <div class="memoryCard" data-name="paleYellow">
+            <img class="front-face" src="http://via.placeholder.com/120/FADA5E/FFFFFF?text=4" alt="front-face" >
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+        <div class="memoryCard" data-name="maroon">
+            <img class="front-face" src="http://via.placeholder.com/120/80000000/FFFFFF?text=5" alt="front-face" >
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+        <div class="memoryCard" data-name="maroon">
+            <img class="front-face" src="http://via.placeholder.com/120/80000000/FFFFFF?text=5" alt="front-face" >
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+        <div class="memoryCard" data-name="orange">
+            <img class="front-face" src="http://via.placeholder.com/120/FF880E4F/FFFFFF?text=6" alt="front-face" >
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+        <div class="memoryCard" data-name="orange">
+            <img class="front-face" src="http://via.placeholder.com/120/FF880E4F/FFFFFF?text=6" alt="front-face" >
+            <img class="back-face" src="http://via.placeholder.com/120/000009/FFFFFF?text=Click ME">
+        </div>
+    </section>
+    <script src="main.js"></script>
+
+
+
+<script type="text/javascript">
+  //show all card faces at the beginning
+var cardsArray = document.getElementsByClassName("memoryCard");
+function showAllCards(){
+    for(i=0; i < cardsArray.length; i++){
+        cardsArray[i].classList.add("flip");
+    }
+};
+function flipAllCards(){
+    for(i=0; i < cardsArray.length; i++){
+    cardsArray[i].classList.remove("flip");
+    }
+}
+setTimeout(showAllCards, 100);
+setTimeout(flipAllCards, 900);
+// set two digits timer //
+var second = 0,
+    minute = 0,
+    hours = 0,
+    timer = document.getElementById("TwoDigitTimer");
+var interval;
+function startTimer(){
+    interval = setInterval(function(){
+       var twoDigitSecond = ("0" + second).slice(-2),
+           twoDigitMinutes = ("0" + minute).slice(-2),
+           twoDigitHours = ("0" + hours).slice(-2);
+        second ++;
+        if(second === 60){
+            minute++;
+            second = 0;
+        };
+        if(minute === 60){
+            hours ++
+            minute = 0;
+            second = 0;
+        };
+      if(clickedCards.length == 12){
+            clearInterval(interval)
+            return;
+        }
+        timer.innerHTML = twoDigitHours + " : " + twoDigitMinutes + " : " + twoDigitSecond;
+    }, 1000);
+};
+
+// ///////////////////////set the timer one digit only////////////////////////
+/*var second = 00,
+    minute = 00,
+    hours = 00;
+var timer = document.getElementById("TimerSection");
+var interval;
+function startTimer(){
+    interval = setInterval(function(){
+        second ++;
+        if(second == 60){
+            minute++;
+            second = 00;
+        }
+        if (minute == 60){
+            hours ++;
+            minute = 00;
+        }
+        if(clickedCards.length == 12){
+            clearInterval(interval)
+            return;
+        }
+        timer.innerHTML = " "+ hours+" "+ " hrs" + " : " + minute +" "+ " mins" + " : " + second + " secs";
+    }, 1000);
+};  */
+//startTimer();
+// add Event listener to each card
+var card = document.getElementsByClassName("memoryCard");
+var clickedCards = [];
+//console.log(card);
+                    //add Event Listener to each card
+for (i=0; i <card.length; i++){
+    card[i].addEventListener("click", flipCard);
+};
+var hasFlipedCard = true;
+var lockBoard = false;
+var firstCard, secondCard;
+function flipCard(){
+    if(second == 0 & minute == 0 & hours == 0){
+        startTimer();
+        document.getElementById("hourGlass").classList.add("rotatedHour");
+    }
+    if(lockBoard){
+        return;
+    }
+    this.classList.add("flip");
+    this.classList.add("removeMe");
+    if(hasFlipedCard){
+        hasFlipedCard = false;
+        firstCard = this;
+        this.removeEventListener("click", flipCard);
+        //return;
+    } else {
+        hasFlipedCard = true;
+        secondCard = this;
+        checkForMatch();
+        firstCard.addEventListener("click", flipCard);
+        stepsCounter();
+    }
+};
+// counting one step
+var moves = 0;
+function stepsCounter(){
+    moves ++;
+    document.getElementById("steps").classList.add("activeStep");
+    document.getElementById("numberOfSteps").innerHTML = moves + " " + "step(s)";
+}
+
+                    //Check Matching cardds
+function checkForMatch(){
+    if(firstCard.dataset.name === secondCard.dataset.name){
+        //disableCards();
+        setTimeout(removeCards, 400);
+        clickedCards.push(firstCard);
+        clickedCards.push(secondCard);
+    } else{
+        lockBoard = true;
+        setTimeout(removeAllAddedClasses, 1000);
+        function removeAllAddedClasses(){
+            firstCard.classList.remove("flip");
+            secondCard.classList.remove("flip");
+            firstCard.classList.remove("removeMe");
+            secondCard.classList.remove("removeMe");
+            lockBoard = false;
+        }
+    }
+};
+function removeCards(){
+    var toBeRemoved = document.querySelectorAll(".removeMe");
+    toBeRemoved[0].innerHTML = "";
+    firstCard.classList.remove("removeMe");
+    toBeRemoved[1].innerHTML = "";
+    secondCard.classList.remove("removeMe");
+    disableCards();
+}
+function disableCards(){
+    firstCard.removeEventListener("click", flipCard);
+    secondCard.removeEventListener("click", flipCard);
+};
+                    //shuffle cards position
+(function shuffle(){
+    for(i=0; i<card.length; i++){
+        var randomPosition = Math.floor(Math.random()*12);
+        card[i].style.order = randomPosition;
+    }
+})();
+
+
+</script>
+
+
+</body>
+</html>
